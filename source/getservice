@@ -1,0 +1,18 @@
+#!/bin/bash
+
+AIRPORTINFO=`networksetup -getinfo AirPort  2> /dev/null | egrep '^Router'`
+ETHERNETINFO=`networksetup -getinfo Ethernet 2> /dev/null | egrep '^Router'`
+
+if [ "$AIRPORTINFO" != "" ]
+then
+  echo -e AirPort
+  exit
+elif [ "$ETHERNETINFO" != "" ]
+then
+  echo -e Ethernet
+  exit
+fi
+
+# Default if can't detect
+echo -e AirPort
+exit
